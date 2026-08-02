@@ -1,0 +1,162 @@
+<mujoco model="delta_closed">
+  <compiler angle="radian" autolimits="true"/>
+
+  <option
+    timestep="0.001"
+    gravity="0 0 -9.81"
+    integrator="RK4"
+    solver="Newton"/>
+
+  <default>
+    <geom contype="0" conaffinity="0" density="500"/>
+    <joint damping="0.5"/>
+    <site size="0.012" rgba="0 1 0 1"/>
+  </default>
+
+  <worldbody>
+    <light pos="0 0 1.8" dir="0 0 -1"/>
+
+    <geom name="floor" type="plane" size="1.2 1.2 0.02" rgba="0.85 0.85 0.85 1"/>
+
+    <geom
+      name="base_plate"
+      type="cylinder"
+      pos="0 0 0.75"
+      size="0.15 0.025"
+      rgba="0.65 0.65 0.65 1"/>
+
+    <!-- Moving platform: translation only.
+         Visual radius = 0.08 m.
+         Attachment radius = 0.07 m. -->
+    <body name="platform" pos="0 0 0.20477">
+      <joint name="platform_x" type="slide" axis="1 0 0" limited="true" range="-0.25 0.25" damping="5"/>
+      <joint name="platform_y" type="slide" axis="0 1 0" limited="true" range="-0.25 0.25" damping="5"/>
+      <joint name="platform_z" type="slide" axis="0 0 1" limited="true" range="-0.15 0.25" damping="5"/>
+
+      <geom
+        name="platform_geom"
+        type="cylinder"
+        size="0.08 0.025"
+        rgba="0.1 0.3 1 1"/>
+
+      <site name="p1" pos="0.07 0 0"/>
+      <site name="p2" pos="-0.035 0.0606 0"/>
+      <site name="p3" pos="-0.035 -0.0606 0"/>
+    </body>
+
+    <body name="upper1" pos="0.13 0 0.75">
+      <joint name="motor1" type="hinge" axis="0 1 0" limited="true" range="-1.2 0.8" damping="0.2"/>
+
+      <geom
+        name="motor1_hub"
+        type="sphere"
+        size="0.03"
+        rgba="0.05 0.05 0.05 1"/>
+
+      <geom
+        name="upper1_geom"
+        type="capsule"
+        fromto="0 0 0 0.12 0 -0.17"
+        size="0.018"
+        rgba="0.8 0.2 0.2 1"/>
+
+      <site name="elbow1" pos="0.12 0 -0.17"/>
+    </body>
+
+    <body name="fore1" pos="0.16 0 0.39238">
+      <freejoint/>
+
+      <geom
+        name="fore1_geom"
+        type="capsule"
+        fromto="0.09 0 0.18762 -0.09 0 -0.18762"
+        size="0.012"
+        rgba="0.15 0.15 0.15 1"/>
+
+      <site name="fore1_top" pos="0.09 0 0.18762"/>
+      <site name="fore1_bottom" pos="-0.09 0 -0.18762"/>
+    </body>
+
+    <body name="upper2" pos="-0.065 0.1126 0.75">
+      <joint name="motor2" type="hinge" axis="-0.866 -0.5 0" limited="true" range="-1.2 0.8" damping="0.2"/>
+
+      <geom
+        name="motor2_hub"
+        type="sphere"
+        size="0.03"
+        rgba="0.05 0.05 0.05 1"/>
+
+      <geom
+        name="upper2_geom"
+        type="capsule"
+        fromto="0 0 0 -0.06 0.1039 -0.17"
+        size="0.018"
+        rgba="0.8 0.2 0.2 1"/>
+
+      <site name="elbow2" pos="-0.06 0.1039 -0.17"/>
+    </body>
+
+    <body name="fore2" pos="-0.08 0.13855 0.39238">
+      <freejoint/>
+
+      <geom
+        name="fore2_geom"
+        type="capsule"
+        fromto="-0.045 0.07795 0.18762 0.045 -0.07795 -0.18762"
+        size="0.012"
+        rgba="0.15 0.15 0.15 1"/>
+
+      <site name="fore2_top" pos="-0.045 0.07795 0.18762"/>
+      <site name="fore2_bottom" pos="0.045 -0.07795 -0.18762"/>
+    </body>
+
+    <body name="upper3" pos="-0.065 -0.1126 0.75">
+      <joint name="motor3" type="hinge" axis="0.866 -0.5 0" limited="true" range="-1.2 0.8" damping="0.2"/>
+
+      <geom
+        name="motor3_hub"
+        type="sphere"
+        size="0.03"
+        rgba="0.05 0.05 0.05 1"/>
+
+      <geom
+        name="upper3_geom"
+        type="capsule"
+        fromto="0 0 0 -0.06 -0.1039 -0.17"
+        size="0.018"
+        rgba="0.8 0.2 0.2 1"/>
+
+      <site name="elbow3" pos="-0.06 -0.1039 -0.17"/>
+    </body>
+
+    <body name="fore3" pos="-0.08 -0.13855 0.39238">
+      <freejoint/>
+
+      <geom
+        name="fore3_geom"
+        type="capsule"
+        fromto="-0.045 -0.07795 0.18762 0.045 0.07795 -0.18762"
+        size="0.012"
+        rgba="0.15 0.15 0.15 1"/>
+
+      <site name="fore3_top" pos="-0.045 -0.07795 0.18762"/>
+      <site name="fore3_bottom" pos="0.045 0.07795 -0.18762"/>
+    </body>
+  </worldbody>
+
+  <equality>
+    <connect name="c1_elbow" site1="elbow1" site2="fore1_top" solref="0.01 1" solimp="0.9 0.95 0.001 0.5 2"/>
+    <connect name="c2_elbow" site1="elbow2" site2="fore2_top" solref="0.01 1" solimp="0.9 0.95 0.001 0.5 2"/>
+    <connect name="c3_elbow" site1="elbow3" site2="fore3_top" solref="0.01 1" solimp="0.9 0.95 0.001 0.5 2"/>
+
+    <connect name="c1_platform" site1="fore1_bottom" site2="p1" solref="0.01 1" solimp="0.9 0.95 0.001 0.5 2"/>
+    <connect name="c2_platform" site1="fore2_bottom" site2="p2" solref="0.01 1" solimp="0.9 0.95 0.001 0.5 2"/>
+    <connect name="c3_platform" site1="fore3_bottom" site2="p3" solref="0.01 1" solimp="0.9 0.95 0.001 0.5 2"/>
+  </equality>
+
+  <actuator>
+    <motor name="act1" joint="motor1" gear="1" ctrlrange="-20 20"/>
+    <motor name="act2" joint="motor2" gear="1" ctrlrange="-20 20"/>
+    <motor name="act3" joint="motor3" gear="1" ctrlrange="-20 20"/>
+  </actuator>
+</mujoco>

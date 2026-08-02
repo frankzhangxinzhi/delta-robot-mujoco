@@ -1,0 +1,27 @@
+# Editor and IDE files
+.vs/
+.vscode/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Local virtual environments
+.venv/
+venv/
+
+# MuJoCo runtime log
+MUJOCO_LOG.TXT
+
+# Generated detailed simulation logs
+*_log.csv
+
+# Generated simulation outputs
+*.png
+*.csv
+result/
+smoothstep/
+trapezoidal/
+S_curve/
+trajectory_comparison/
+timing_sweep_results/
