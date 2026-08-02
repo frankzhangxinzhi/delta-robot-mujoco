@@ -4,6 +4,16 @@ A simulation study of a simplified closed-chain delta robot performing repeated 
 
 The robot model is inspired by the general structure of the ABB IRB 360 FlexPicker, but it is not intended to be an exact reproduction of the commercial robot.
 
+## Results Preview
+
+### Trajectory Profile Velocity Comparison
+
+![Peak velocity comparison](media/02_peak_velocity_comparison.png)
+
+### End-Effector Tracking Error Comparison
+
+![Peak tracking error comparison](media/04_peak_tracking_error_comparison.png)
+
 ## Authors
 
 - Frank Zhang

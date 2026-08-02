@@ -25,3 +25,8 @@ trapezoidal/
 S_curve/
 trajectory_comparison/
 timing_sweep_results/
+
+# Allow selected README media
+!media/
+!media/*.png
+!media/*.gif
