@@ -6,6 +6,10 @@ The robot model is inspired by the general structure of the ABB IRB 360 FlexPick
 
 ## Results Preview
 
+### MuJoCo Simulation Demo
+
+![Delta robot pick-and-place simulation](media/mujoco_demo.gif)
+
 ### Trajectory Profile Velocity Comparison
 
 ![Peak velocity comparison](media/02_peak_velocity_comparison.png)
@@ -64,7 +68,7 @@ Compare smoothstep, trapezoidal, and S-curve trajectory profiles:
 py -3.11 test_mujoco_trajectory.py
 ```
 
-The script runs the same pick-and-place task for all three profiles and compares peak velocity, acceleration, actuator torque, tracking error, and estimated minimum feasible cycle time. Results are saved in:
+The script runs the same pick-and-place task for all three profiles and compares peak velocity, acceleration, actuator torque, tracking error, and estimated torque-limited cycle time. Results are saved in:
 
 - `smoothstep/`
 - `trapezoidal/`
